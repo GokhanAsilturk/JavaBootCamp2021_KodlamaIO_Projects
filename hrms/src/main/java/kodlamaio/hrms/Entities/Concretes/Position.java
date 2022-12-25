@@ -1,27 +1,28 @@
 package kodlamaio.hrms.Entities.Concretes;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Positions")
 public class Position {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "positionName")
-    private String positionName;
+    @Column(name = "positionName",unique = true)
+    private String name;
 
-
-    public Position() {
-    }
-
-    public Position(int id, String positionName) {
-        this.id = id;
-        this.positionName = positionName;
-    }
 
 }

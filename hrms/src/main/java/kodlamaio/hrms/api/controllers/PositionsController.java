@@ -1,16 +1,16 @@
 package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.Business.Abstracts.PositionService;
-import kodlamaio.hrms.Entities.Concretes.Position;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import kodlamaio.hrms.Business.Requests.PositionRequests.AddPositionRequest;
+import kodlamaio.hrms.Business.Responses.PositionResponses.GetAllPositionsResponse;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/positions")
+@RequestMapping(value = "/api/position")
 public class PositionsController {
 
     private PositionService positionService;
@@ -19,6 +19,13 @@ public class PositionsController {
         this.positionService = positionService;
     }
 
-    @GetMapping("/getAllPositions")
-    public List<Position> getAllPositions() {return this.positionService.getAll();}
+    @GetMapping
+    public DataResult<List<GetAllPositionsResponse>> getAllPositions() {
+        return this.positionService.getAll();
+    }
+
+    @PostMapping
+    public Result add(@Valid @RequestBody AddPositionRequest addPositionRequest) {
+        return positionService.add(addPositionRequest);
+    }
 }

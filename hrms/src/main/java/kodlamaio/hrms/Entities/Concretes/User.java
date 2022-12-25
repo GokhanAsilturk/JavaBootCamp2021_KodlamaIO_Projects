@@ -17,7 +17,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-
+@Builder(builderMethodName = "userBuilder") //Builder method name override. - Builder methodunun ismini diğer entity klaslar ile
+//çakışmaması için değiştiriyoruz.
 public class User {
 
     @Id
